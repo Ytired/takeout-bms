@@ -10,7 +10,9 @@
 				</el-header>
 				<el-main>
 					<el-card>
-						<router-view></router-view>
+						<transition name="main">
+							<router-view></router-view>
+						</transition>
 					</el-card>
 				</el-main>
 			</el-container>
@@ -73,6 +75,15 @@ export default {
 			padding: 20px 20px 0;
 			background-color: #f1f2f6;
 			border-radius: 15px;
+
+			.main-enter-active,
+			.main-leave-active {
+				transition: all 0.2s;
+			}
+			.main-enter-to, .main-leave-to /* .fade-leave-active below version 2.1.8 */ {
+				opacity: 0;
+				transform: translateX(10px);
+			}
 		}
 	}
 }

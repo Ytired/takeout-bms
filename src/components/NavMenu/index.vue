@@ -47,7 +47,6 @@ export default {
 	},
 	methods: {
 		handleOpen(key, keyPath) {
-			console.log(111)
 			if (key !== this.$route.path) {
 				setTimeout(() => {
 					this.$router.push(key)

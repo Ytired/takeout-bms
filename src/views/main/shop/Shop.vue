@@ -14,19 +14,22 @@
 						<el-input
 							type="textarea"
 							placeholder="请输入内容"
-							clearable
 							rows="8"
-							v-model="shopDetails.bulletion"
-							:value="shopDetails.bulletion"
+							v-model="shopDetails.bulletin"
+							:value="shopDetails.bulletin"
 						></el-input>
 					</el-form-item>
 					<el-form-item label="店铺头像">
-						<el-image
-							style="width: 200px; height: 200px; border-radius: 10px"
-							:src="shopDetails.avatar"
-							:preview-src-list="shopDetails.pics"
-							lazy
-						></el-image>
+						<el-upload
+							class="avatar-uploader"
+							action="http://127.0.0.1:3000/shop/upload"
+							:preview-src-list="false"
+							:on-success="handleAvatarSuccess"
+							:show-file-list="false"
+						>
+							<img v-if="imageUrl" :src="imageUrl" class="avatar" />
+							<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+						</el-upload>
 					</el-form-item>
 					<el-form-item label="店铺图片">
 						<UploadImage :fileList="fileList" url="http://127.0.0.1:3000/shop/upload" />
@@ -88,15 +91,15 @@ export default {
 				supports: []
 			},
 			fileList: [],
-			activity: ''
+			activity: '',
+			imageUrl: ''
 		}
 	},
 	methods: {
-		handleRemove(file, fileList) {
-			console.log(file, fileList)
-		},
-		handlePreview(file) {
-			console.log(file)
+		handleAvatarSuccess(respone, file) {
+			this.imageUrl = URL.createObjectURL(file.raw)
+			this.shopDetails.avatar = respone.imgUrl
+			console.log(respone)
 		},
 		async handleSave() {
 			let data = {}
@@ -107,7 +110,7 @@ export default {
 					} else if (key === 'pics' && this.shopDetails[key].length !== 0) {
 						data[key] = this.shopDetails.pics.map(item => {
 							if (item.includes('http://127.0.0.1:3000/upload/shop/')) {
-								return item.substring(this.shopDetails.avatar.lastIndexOf('/') + 1)
+								return item.substring(item.lastIndexOf('/') + 1)
 							}
 							return item
 						})
@@ -116,12 +119,12 @@ export default {
 					}
 				}
 			}
-
 			for (const key in data) {
 				if (key === 'date' || key === 'pics' || key === 'supports') {
 					data[key] = JSON.stringify(data[key])
 				}
 			}
+			console.log(data)
 			const res = await changeShopDetails(data)
 
 			if (!res.code) {
@@ -134,11 +137,16 @@ export default {
 	async created() {
 		const res = await getShopDetails()
 		this.shopDetails = res.data
+		this.imageUrl = res.data.avatar
 		this.fileList = res.data.pics.map(item => ({ url: item }))
 	},
 	mounted() {
 		EventBus.$on('uploadImg', imgUrl => {
 			this.shopDetails.pics.push(imgUrl)
+		})
+
+		EventBus.$on('removeImg', imgArr => {
+			this.shopDetails.pics = imgArr
 		})
 	},
 	destroyed() {
@@ -176,6 +184,30 @@ export default {
 	.rate {
 		display: flex;
 		align-items: center;
+	}
+
+	.avatar-uploader .el-upload {
+		border: 1px dashed #d9d9d9;
+		border-radius: 6px;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+	}
+	.avatar-uploader .el-upload:hover {
+		border-color: #409eff;
+	}
+	.avatar-uploader-icon {
+		font-size: 28px;
+		color: #8c939d;
+		width: 178px;
+		height: 178px;
+		line-height: 178px;
+		text-align: center;
+	}
+	.avatar {
+		width: 178px;
+		height: 178px;
+		display: block;
 	}
 }
 </style>

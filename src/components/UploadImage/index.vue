@@ -32,6 +32,8 @@ export default {
 	},
 	methods: {
 		handleRemove(file, fileList) {
+			const imgArr = fileList.map(item => item.url)
+			EventBus.$emit('removeImg', imgArr)
 			console.log('handleRemove', file, fileList)
 		},
 		handleSuccess(respone) {

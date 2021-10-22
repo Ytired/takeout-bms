@@ -46,7 +46,6 @@ export default {
 	},
 	methods: {
 		handleAvatarSuccess(res, file) {
-			console.log()
 			this.imageUrl = URL.createObjectURL(file.raw)
 			if (!res.code) {
 				this.userInfo.imgUrl = 'http://127.0.0.1:3000/upload/imgs/acc_img/' + res.imgUrl
