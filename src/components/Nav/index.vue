@@ -1,10 +1,9 @@
 <template>
 	<div class="nav-breadcrumb">
 		<el-breadcrumb separator-class="el-icon-arrow-right">
-			<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-			<el-breadcrumb-item>活动管理</el-breadcrumb-item>
-			<el-breadcrumb-item>活动列表</el-breadcrumb-item>
-			<el-breadcrumb-item>活动详情</el-breadcrumb-item>
+			<el-breadcrumb-item v-for="item in crumbs" :key="item">
+				{{ item }}
+			</el-breadcrumb-item>
 		</el-breadcrumb>
 		<div class="user-info">
 			<NavUserInfo :userInfo="userInfo" />
@@ -26,6 +25,11 @@ export default {
 	},
 	created() {
 		this.userInfo = this.$store.state.userInfo.userInfo
+	},
+	computed: {
+		crumbs() {
+			return this.$store.state.order.crumbs
+		}
 	}
 }
 </script>

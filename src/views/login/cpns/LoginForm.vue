@@ -30,7 +30,7 @@
 		<!-- 找回密码 -->
 		<div class="account-info">
 			<div class="remember-pwd">
-				<el-checkbox>记住密码</el-checkbox>
+				<el-checkbox checked>记住密码</el-checkbox>
 			</div>
 			<div class="tiparea">
 				<p>
@@ -63,7 +63,7 @@ export default {
 			this.$refs[loginForm].validate(async valid => {
 				if (valid) {
 					const res = await handleLogin(this.loginInfo)
-					if (res.code === 0) {
+					if (res?.code === 0) {
 						setCache('userInfo', { id: res.id, role: res.role, token: res.token })
 						success('登陆成功')
 						this.$router.push('/main/home')

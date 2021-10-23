@@ -4,7 +4,13 @@
 			<img class="img" src="~@/assets/images/logo.svg" alt="" />
 			<span class="title">外卖管理系统</span>
 		</div>
-		<el-menu :default-active="this.$route.path" class="el-menu-vertical-demo" @open="handleOpen">
+		<el-menu
+			:default-active="this.$route.path"
+			class="el-menu-vertical-demo"
+			@open="handleOpen"
+			@select="selectMenu"
+			:unique-opened="true"
+		>
 			<template v-for="(item, index) in navList">
 				<!-- 一级路由 -->
 				<el-menu-item
@@ -18,7 +24,7 @@
 				</el-menu-item>
 
 				<!-- 二级路由 -->
-				<el-submenu v-else :index="item.children[0].path" :key="index">
+				<el-submenu v-else :index="item.children[0].path" :key="item.title">
 					<template #title>
 						<i :class="item.icon"></i>
 						<span slot="title">{{ item.title }}</span>
@@ -36,23 +42,25 @@
 
 <script>
 import { routerList } from './config'
+import { EventBus } from '@/utils/eventBus'
 
 export default {
 	emits: ['menuInfo'],
 	data() {
 		return {
 			isCollapse: true,
-			navList: []
+			navList: [],
+			crumbs: []
 		}
 	},
 	methods: {
 		handleOpen(key, keyPath) {
-			if (key !== this.$route.path) {
-				setTimeout(() => {
-					this.$router.push(key)
-				}, 200)
-			}
-			return
+			// if (key !== this.$route.path) {
+			// 	setTimeout(() => {
+			// 		this.$router.push(key)
+			// 	}, 200)
+			// }
+			// return
 		},
 		handleClose(key, keyPath) {
 			console.log(key, keyPath)
@@ -60,13 +68,41 @@ export default {
 		handleItemClick(menu) {
 			if (menu.path !== this.$route.path) {
 				this.$router.push(menu.path)
-				this.$emit('menuInfo', menu)
 			}
 			return
+		},
+		selectMenu(index, indexPath) {
+			const crumbs = []
+			// 遍历拿到路由树里面的title
+			for (const menu of routerList) {
+				if (index === menu?.path) {
+					crumbs.push(menu.title)
+				} else {
+					if (menu.children) {
+						for (const menuChild of menu.children) {
+							if (index === menuChild?.path) {
+								crumbs.push(menu.title, menuChild.title)
+							}
+						}
+					}
+				}
+			}
+
+			// 触发事件
+			this.$store.dispatch('order/actionCrumbs', crumbs)
 		}
 	},
 	created() {
 		this.navList = routerList
+		this.selectMenu(this.$route.fullPath)
+	},
+	destroyed() {
+		EventBus.$off()
+	},
+	watch: {
+		$route(to) {
+			this.selectMenu(to.path)
+		}
 	}
 }
 </script>

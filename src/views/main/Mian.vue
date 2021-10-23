@@ -35,9 +35,7 @@ export default {
 		}
 	},
 	methods: {
-		menuInfo(menu) {
-			console.log(menu)
-		}
+		menuInfo(menu) {}
 	}
 }
 </script>

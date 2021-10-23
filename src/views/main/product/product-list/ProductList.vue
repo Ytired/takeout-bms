@@ -63,7 +63,6 @@ export default {
 		})
 		// 更改条数
 		EventBus.$on('changeSize', async value => {
-			console.log(value)
 			const res = await getProductList(1, value)
 			const data = handleData(res)
 			this.productData = data

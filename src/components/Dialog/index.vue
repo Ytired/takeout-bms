@@ -240,6 +240,7 @@ export default {
 	},
 	mounted() {
 		EventBus.$on('openDialog', (index, data, show) => {
+			this.show = false
 			// 判断显示哪一个表单
 			if (index === '显示') {
 				this.isShow = false
