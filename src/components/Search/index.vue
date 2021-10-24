@@ -66,7 +66,6 @@ export default {
 			this.$emit('searchData', data)
 		},
 		resetForm(formName) {
-			console.log(this.$refs[formName])
 			setTimeout(() => {
 				this.$refs[formName].resetFields()
 			}, 0)

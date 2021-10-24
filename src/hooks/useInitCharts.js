@@ -38,25 +38,21 @@ function judge(options) {
 					{
 						name: '订单',
 						type: 'line',
-						stack: 'Total',
 						data: options.orderData
 					},
 					{
 						name: '销售额',
 						type: 'line',
-						stack: 'Total',
 						data: options.amountData
 					},
 					{
 						name: '注册人数',
 						type: 'line',
-						stack: 'Total',
 						data: [150, 232, 201, 154, 190, 330, 410]
 					},
 					{
 						name: '管理员人数',
 						type: 'line',
-						stack: 'Total',
 						data: [320, 332, 301, 334, 390, 330, 320]
 					}
 				]
@@ -98,25 +94,21 @@ function judge(options) {
 					{
 						name: '订单',
 						type: 'line',
-						stack: 'Total',
 						data: [220, 182, 191, 234, 290, 330, 310]
 					},
 					{
 						name: '销售额',
 						type: 'line',
-						stack: 'Total',
 						data: [120, 132, 101, 134, 90, 230, 210]
 					},
 					{
 						name: '注册人数',
 						type: 'line',
-						stack: 'Total',
 						data: [150, 232, 201, 154, 190, 330, 410]
 					},
 					{
 						name: '管理员人数',
 						type: 'line',
-						stack: 'Total',
 						data: [320, 332, 301, 334, 390, 330, 320]
 					}
 				]
@@ -156,7 +148,6 @@ function judge(options) {
 					{
 						name: '邮件营销',
 						type: 'line',
-						stack: 'Total',
 						areaStyle: {},
 						emphasis: {
 							focus: 'series'
@@ -166,7 +157,6 @@ function judge(options) {
 					{
 						name: '联盟广告',
 						type: 'line',
-						stack: 'Total',
 						areaStyle: {},
 						emphasis: {
 							focus: 'series'
@@ -176,7 +166,6 @@ function judge(options) {
 					{
 						name: '视频广告',
 						type: 'line',
-						stack: 'Total',
 						areaStyle: {},
 						emphasis: {
 							focus: 'series'
@@ -186,7 +175,6 @@ function judge(options) {
 					{
 						name: '直接访问',
 						type: 'line',
-						stack: 'Total',
 						areaStyle: {},
 						emphasis: {
 							focus: 'series'
@@ -196,7 +184,6 @@ function judge(options) {
 					{
 						name: '搜索引擎',
 						type: 'line',
-						stack: 'Total',
 						label: {
 							show: true,
 							position: 'top'
