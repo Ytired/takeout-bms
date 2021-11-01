@@ -1,6 +1,6 @@
 module.exports = {
 	outputDir: './build',
-	// publicPath: './',
+	publicPath: './',
 	devServer: {
 		open: true
 	},
