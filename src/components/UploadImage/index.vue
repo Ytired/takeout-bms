@@ -24,7 +24,7 @@ export default {
 		},
 		url: {
 			type: String,
-			default: 'http://127.0.0.1:3000/goods/goods_img_upload'
+			default: 'http://39.103.221.52:3000/goods/goods_img_upload'
 		}
 	},
 	data() {

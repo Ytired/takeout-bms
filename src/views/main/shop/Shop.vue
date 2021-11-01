@@ -22,7 +22,7 @@
 					<el-form-item label="店铺头像">
 						<el-upload
 							class="avatar-uploader"
-							action="http://127.0.0.1:3000/shop/upload"
+							action="http://39.103.221.52:3000/shop/upload"
 							:preview-src-list="false"
 							:on-success="handleAvatarSuccess"
 							:show-file-list="false"
@@ -32,7 +32,7 @@
 						</el-upload>
 					</el-form-item>
 					<el-form-item label="店铺图片">
-						<UploadImage :fileList="fileList" url="http://127.0.0.1:3000/shop/upload" />
+						<UploadImage :fileList="fileList" url="http://39.103.221.52:3000/shop/upload" />
 					</el-form-item>
 					<el-form-item label="配送费">
 						<el-input v-model="shopDetails.deliveryPrice" />
@@ -109,7 +109,7 @@ export default {
 						data[key] = this.shopDetails[key].substring(this.shopDetails[key].lastIndexOf('/') + 1)
 					} else if (key === 'pics' && this.shopDetails[key].length !== 0) {
 						data[key] = this.shopDetails.pics.map(item => {
-							if (item.includes('http://127.0.0.1:3000/upload/shop/')) {
+							if (item.includes('http://39.103.221.52:3000/upload/shop/')) {
 								return item.substring(item.lastIndexOf('/') + 1)
 							}
 							return item

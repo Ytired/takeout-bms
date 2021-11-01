@@ -24,7 +24,7 @@
 		<el-divider></el-divider>
 		<el-upload
 			class="avatar-uploader"
-			action="http://127.0.0.1:3000/users/avatar_upload"
+			action="http://39.103.221.52:3000/users/avatar_upload"
 			:data="{ id: userInfo.id }"
 			:show-file-list="false"
 			:on-success="handleAvatarSuccess"
@@ -48,7 +48,7 @@ export default {
 		handleAvatarSuccess(res, file) {
 			this.imageUrl = URL.createObjectURL(file.raw)
 			if (!res.code) {
-				this.userInfo.imgUrl = 'http://127.0.0.1:3000/upload/imgs/acc_img/' + res.imgUrl
+				this.userInfo.imgUrl = 'http://39.103.221.52:3000/upload/imgs/acc_img/' + res.imgUrl
 				this.Message.success({
 					message: '修改成功！',
 					center: true

@@ -205,7 +205,7 @@ export default {
 						actionData.imgUrl = actionData.imgUrl.substring(data.imgUrl.lastIndexOf('/') + 1)
 					} else {
 						actionData.imgUrl = this.imgUrl
-						data.imgUrl = `http://127.0.0.1:3000/upload/imgs/goods_img/${this.imgUrl}`
+						data.imgUrl = `http://39.103.221.52:3000/upload/imgs/goods_img/${this.imgUrl}`
 					}
 				}
 
